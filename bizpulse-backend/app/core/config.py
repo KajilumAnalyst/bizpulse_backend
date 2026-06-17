@@ -27,6 +27,18 @@ class Settings:
     OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "llama3")
 
     # CORS
-    ALLOWED_ORIGINS: list = os.getenv("ALLOWED_ORIGINS", "http://localhost:5500").split(",")
+    # To override, set ALLOWED_ORIGINS as a comma-separated env var on Railway, e.g.:
+    # ALLOWED_ORIGINS=https://your-app.vercel.app,https://your-preview.vercel.app
+    _default_origins = ",".join([
+        "http://localhost:5500",
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:8080",
+        "http://127.0.0.1:5500",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "https://biz-pulse-sigma.vercel.app",
+    ])
+    ALLOWED_ORIGINS: list = os.getenv("ALLOWED_ORIGINS", _default_origins).split(",")
 
 settings = Settings()
