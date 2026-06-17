@@ -23,9 +23,22 @@ app = FastAPI(
 )
 
 # ── CORS ───────────────────────────────────────────────────────────────────
+# Explicit origins list. Add your Vercel production URL and any preview URLs here.
+ALLOWED_ORIGINS = [
+    "https://bizpulsebackend-production.up.railway.app",  # Railway (self)
+    "http://localhost:3000",       # Local dev (React/Vite)
+    "http://localhost:5173",       # Local dev (Vite default)
+    "http://localhost:8080",       # Local dev (alternative)
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:5173",
+    # ⬇️ Replace with your actual Vercel deployment URLs
+    "https://your-app.vercel.app",
+    # "https://your-app-git-main-yourteam.vercel.app",  # Vercel preview URL (optional)
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
